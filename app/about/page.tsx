@@ -11,20 +11,20 @@ export default function AboutPage() {
       <h1 className="text-3xl font-bold text-white sm:text-4xl">
         About SellPark
       </h1>
-      <p className="mt-4 text-slate-400">
-        We build and integrate solutions for digital and software shops — and we built a custom crypto payment gateway.
+      <p className="mt-4 text-lg text-slate-400">
+        We’re full-stack developers. We build and integrate everything for digital and software shops — and we built a custom crypto payment gateway.
       </p>
 
-      <div className="mt-14 space-y-10 text-slate-300">
+      <div className="mt-14 space-y-12 text-slate-300">
         <section>
-          <h2 className="text-lg font-semibold text-white">What we do</h2>
+          <h2 className="text-xl font-semibold text-white">What we do</h2>
           <p className="mt-3">
-            SellPark provides coding services for shops: digital products, software, and related storefronts. We also offer Stripe holding and exchange to crypto, and we developed a fully working custom crypto payment gateway. We can implement the gateways you wish — tell us which ones you need and we integrate them into your shop.
+            SellPark provides full-stack coding services for shops: digital products, software, and related storefronts. We do all the things to create a good-looking, fully working shop — front-end, back-end, and payments. We also offer Stripe holding and exchange to crypto, and we developed a fully working custom crypto payment gateway. We can implement the gateways you wish — tell us which ones you need and we integrate them into your shop.
           </p>
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold text-white">Our focus</h2>
+          <h2 className="text-xl font-semibold text-white">Our focus</h2>
           <p className="mt-3">
             We focus on making your shop work end-to-end: from storefront and checkout to fiat and crypto payments. Our custom gateway gives you control over which chains and assets you support.
           </p>
