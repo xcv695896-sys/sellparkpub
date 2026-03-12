@@ -7,10 +7,9 @@
     </linearGradient>
   </defs>
   <!-- Bag -->
-  <path d="M8 14h24v14H8V14z" fill="url(#logoGrad)" fillOpacity="0.95"/>
-  <path d="M12 14V10a4 4 0 018 0v4" stroke="url(#logoGrad)" strokeWidth="2" fill="none"/>
+  <path d="M8 14h24v14H8V14z" fill="url(#logoGrad)" fill-opacity="0.95"/>
+  <path d="M12 14V10a4 4 0 018 0v4" stroke="url(#logoGrad)" stroke-width="2" fill="none"/>
   <rect x="26" y="10" width="3" height="3" fill="#8b5cf6" opacity="0.9"/>
   <rect x="30" y="8" width="2" height="2" fill="#6366f1"/>
-  <!-- Text SellPark -->
-  <text x="44" y="28" fontFamily="system-ui, -apple-system, sans-serif" fontSize="22" fontWeight="600" fill="url(#logoGrad)">SellPark</text>
+  <text x="44" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="600" fill="url(#logoGrad)">SellPark</text>
 </svg>
