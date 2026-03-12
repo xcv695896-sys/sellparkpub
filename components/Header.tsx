@@ -18,14 +18,17 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <Link href="/" className="flex items-center shrink-0" aria-label="SellPark Home">
-          <div className="relative h-10 w-[140px] sm:h-11 sm:w-[160px]">
+          <div className="relative flex items-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logo.svg"
-              alt=""
-              className="h-full w-full object-contain object-left"
-              width={160}
-              height={40}
+              src="/logo.png"
+              alt="SellPark"
+              className="h-9 w-auto max-h-12 object-contain object-left sm:h-10"
+              style={{ maxWidth: "min(180px, 45vw)" }}
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = "/logo.svg";
+              }}
             />
           </div>
         </Link>
