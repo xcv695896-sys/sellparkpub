@@ -17,19 +17,17 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="relative h-9 w-9 sm:h-10 sm:w-10">
+        <Link href="/" className="flex items-center shrink-0" aria-label="SellPark Home">
+          <div className="relative h-10 w-[140px] sm:h-11 sm:w-[160px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logo.png"
-              alt="SellPark"
-              className="h-full w-full object-contain"
-              onError={(e) => { e.currentTarget.src = "/logo.svg"; }}
+              src="/logo.svg"
+              alt=""
+              className="h-full w-full object-contain object-left"
+              width={160}
+              height={40}
             />
           </div>
-          <span className="text-xl font-semibold tracking-tight text-white">
-            Sell<span className="text-gradient">Park</span>
-          </span>
         </Link>
 
         <nav className="hidden md:flex md:items-center md:gap-8">
