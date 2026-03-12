@@ -1,12 +1,16 @@
-<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bag" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="50%" style="stop-color:#6366f1"/>
       <stop offset="100%" style="stop-color:#8b5cf6"/>
     </linearGradient>
   </defs>
-  <path d="M8 14h24v14H8V14z" fill="url(#bag)" fillOpacity="0.9"/>
-  <path d="M12 14V10a4 4 0 018 0v4" stroke="url(#bag)" strokeWidth="2" fill="none"/>
+  <!-- Bag -->
+  <path d="M8 14h24v14H8V14z" fill="url(#logoGrad)" fillOpacity="0.95"/>
+  <path d="M12 14V10a4 4 0 018 0v4" stroke="url(#logoGrad)" strokeWidth="2" fill="none"/>
   <rect x="26" y="10" width="3" height="3" fill="#8b5cf6" opacity="0.9"/>
   <rect x="30" y="8" width="2" height="2" fill="#6366f1"/>
+  <!-- Text SellPark -->
+  <text x="44" y="28" fontFamily="system-ui, -apple-system, sans-serif" fontSize="22" fontWeight="600" fill="url(#logoGrad)">SellPark</text>
 </svg>
