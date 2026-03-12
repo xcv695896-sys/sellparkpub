@@ -23,8 +23,8 @@ export default function Header() {
             <img
               src="/logo.png"
               alt="SellPark"
-              className="h-9 w-auto max-h-12 object-contain object-left sm:h-10"
-              style={{ maxWidth: "min(180px, 45vw)" }}
+              className="h-10 w-auto object-contain object-left sm:h-11"
+              style={{ maxWidth: "200px" }}
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src = "/logo.svg";
