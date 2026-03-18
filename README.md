@@ -48,6 +48,21 @@ email2@x.com|pass456|JBSWY3DPEHPK3PXP
 - Connect repo, add env vars, deploy.
 - Run `prisma db push` against production DB (or use migrations).
 
+### Build feels stuck / logs show “loading…”
+
+Usually **not broken**:
+
+1. **Vercel log UI** often shows “loading…” for a while before lines appear — the build can still be running (install ~1–3 min, `prisma generate` ~30–90s, `next build` ~2–5 min first time).
+2. **Free tier** can sit in **queue** several minutes before the build starts.
+3. After deploy, open the deployment → **Building** state. If it eventually shows **Ready**, it was fine.
+
+If it **fails** or runs **15+ minutes**:
+
+- Ensure **`DATABASE_URL`** is set (needed at **runtime**, not always for build — Prisma generate does not need DB).
+- Redeploy; check [Vercel Status](https://www.vercel-status.com/) for outages.
+
+This repo skips `prisma generate` on Vercel’s **install** step and runs it once in **build** to avoid duplicate work.
+
 ## Routes
 
 - `/` — Shop home  
