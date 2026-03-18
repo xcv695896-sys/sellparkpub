@@ -31,7 +31,9 @@ export default function AdminLoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-slate-950 px-4">
       <form onSubmit={submit} className="w-full max-w-sm rounded-2xl border border-white/10 bg-slate-900 p-8">
         <h1 className="text-xl font-bold text-white">Admin</h1>
-        <p className="mt-1 text-xs text-slate-500">Default: {DEFAULT_EMAIL}</p>
+        <p className="mt-1 text-xs text-slate-500">
+          Default login: {DEFAULT_EMAIL} / Admin1234! (set ADMIN_PASSWORD_HASH in production)
+        </p>
         <input
           type="email"
           value={email}
@@ -45,7 +47,7 @@ export default function AdminLoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="mt-3 w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-white"
-          placeholder="Password"
+          placeholder="Admin1234!"
           autoComplete="current-password"
         />
         {err && <p className="mt-2 text-sm text-red-400">{err}</p>}
