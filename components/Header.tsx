@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useState } from "react";
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/sellpark", label: "Home" },
+  { href: "/sellpark/services", label: "Services" },
+  { href: "/sellpark/projects", label: "Projects" },
+  { href: "/sellpark/about", label: "About" },
+  { href: "/sellpark/contact", label: "Contact" },
 ];
 
 export default function Header() {
@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-        <Link href="/" className="flex items-center shrink-0" aria-label="SellPark Home">
+        <Link href="/sellpark" className="flex items-center shrink-0" aria-label="SellPark Home">
           <div className="relative flex items-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
