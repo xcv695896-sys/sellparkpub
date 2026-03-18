@@ -2,16 +2,16 @@ import Link from "next/link";
 
 const footerLinks = {
   product: [
-    { href: "/services", label: "Services" },
-    { href: "/projects", label: "Projects" },
-    { href: "/about", label: "About" },
+    { href: "/sellpark/services", label: "Services" },
+    { href: "/sellpark/projects", label: "Projects" },
+    { href: "/sellpark/about", label: "About" },
   ],
   legal: [
-    { href: "/terms", label: "Terms of Service" },
-    { href: "/privacy", label: "Privacy Policy" },
+    { href: "/sellpark/terms", label: "Terms of Service" },
+    { href: "/sellpark/privacy", label: "Privacy Policy" },
   ],
   contact: [
-    { href: "/contact", label: "Contact" },
+    { href: "/sellpark/contact", label: "Contact" },
     { href: "https://t.me/nmar200", label: "Telegram", external: true },
   ],
 };
