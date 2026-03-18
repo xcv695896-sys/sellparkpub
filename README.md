@@ -1,70 +1,57 @@
-# SellPark — sellpark.io
+# SellPark — Account shop + agency site
 
-Website for **SellPark**: coding and crypto payment solutions for digital and software shops.
+Vercel-ready **digital account shop** (guest checkout, Stripe, Plisio crypto, email delivery, live TOTP for 2FA stock) plus **SellPark dev services** at `/sellpark`.
 
-- **Stack:** Next.js 14, TypeScript, Tailwind CSS
-- **Deploy:** Vercel (recommended)
+## Setup
 
-## Run locally
+1. **PostgreSQL** — [Neon](https://neon.tech), Supabase, or Vercel Postgres. Set `DATABASE_URL` in `.env`.
 
-```bash
-npm install
-npm run dev
+2. **Install & DB**
+   ```bash
+   npm install
+   npx prisma db push
+   npm run db:seed
+   ```
+
+3. **Admin login** — Default: **admin@sellpark.io** / **Admin1234!** (works if `ADMIN_PASSWORD_HASH` is empty). For production, run `npm run admin:hash YourNewPassword`, set `ADMIN_PASSWORD_HASH`, and set a strong `ADMIN_SESSION_SECRET`.
+
+4. **Stripe** — `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (for future Elements), `STRIPE_WEBHOOK_SECRET`. Webhook URL: `https://your-domain.com/api/webhooks/stripe` → `checkout.session.completed`.
+
+5. **Plisio** — `PLISIO_API_KEY`. Callback URL in dashboard: `https://your-domain.com/api/webhooks/plisio` (optional; success flow also calls verify API).
+
+6. **SMTP** — `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` for order delivery emails.
+
+7. **App URL** — `NEXT_PUBLIC_APP_URL=https://your-domain.com`
+
+8. **hCaptcha (optional)** — `HCAPTCHA_SECRET` + `NEXT_PUBLIC_HCAPTCHA_SITEKEY` if you wire the token into checkout.
+
+## Features
+
+| Feature | Notes |
+|--------|--------|
+| Shop UI | Light theme, product grid, cart, checkout (screenshot-inspired) |
+| Guest checkout | Email + Stripe or Plisio |
+| Auto delivery | SMTP email with private link `/orders/[token]` |
+| 2FA / OTP | Bulk format `email\|password\|BASE32_SECRET` — live TOTP on delivery page |
+| Admin | Products, bulk stock import, dashboard |
+| CAPTCHA | hCaptcha **verification** only — we do **not** implement CAPTCHA bypass |
+
+## Bulk stock format
+
+```
+email@x.com|password123
+email2@x.com|pass456|JBSWY3DPEHPK3PXP
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+## Deploy (Vercel)
 
-## Deploy on Vercel
+- Connect repo, add env vars, deploy.
+- Run `prisma db push` against production DB (or use migrations).
 
-1. Push this repo to GitHub (or connect your Git provider in Vercel).
-2. Go to [vercel.com](https://vercel.com) → **Add New Project** → import this repository.
-3. Leave **Build Command** as `next build` and **Output Directory** as default.
-4. Deploy. Vercel will detect Next.js and set everything automatically.
+## Routes
 
-Or with Vercel CLI:
-
-```bash
-npm i -g vercel
-vercel
-```
-
-## Logo
-
-Place your SellPark logo at **`public/logo.png`**. If it’s missing, the site falls back to the included `public/logo.svg` placeholder.
-
-## Pages
-
-- **Home** — Hero, services overview, crypto gateway, projects (perv.gg), CTA, Telegram contact
-- **Services** — Shop development, Stripe → Crypto, custom crypto gateway (and “which gateways we implement”)
-- **Projects** — Featured: perv.gg
-- **About** — What we do, focus, contact
-- **Contact** — Telegram t.me/nmar200
-- **Terms of Service** — `/terms`
-- **Privacy Policy** — `/privacy`
-
-Contact for clients: **t.me/nmar200**
-
----
-
-## Push to GitHub
-
-Repo: [https://github.com/xcv695896-sys/sellparkpub](https://github.com/xcv695896-sys/sellparkpub)
-
-**Option A — Run the script (PowerShell):**
-```powershell
-cd c:\Users\autob\Desktop\projects\sellpark.io
-.\push-to-github.ps1
-```
-
-**Option B — Manual commands:**
-```bash
-cd c:\Users\autob\Desktop\projects\sellpark.io
-git init
-git add .
-git commit -m "Initial commit: SellPark website"
-git branch -M main
-git remote add origin https://github.com/xcv695896-sys/sellparkpub.git
-git push -u origin main
-```
-
-If GitHub asks for auth: use a [Personal Access Token](https://github.com/settings/tokens) (HTTPS) or set up [SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).
+- `/` — Shop home  
+- `/products`, `/p/[slug]`, `/cart`, `/checkout`  
+- `/orders/[token]` — Delivery (after payment)  
+- `/admin/login`, `/admin` — Dashboard  
+- `/sellpark/*` — Original SellPark marketing pages  
