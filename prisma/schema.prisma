@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  slug        String      @unique
+  name        String
+  description String?
+  priceCents  Int
+  imageUrl    String?
+  category    String?
+  active      Boolean     @default(true)
+  accounts    Account[]
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Account {
+  id          String    @id @default(cuid())
+  productId   String
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  email       String?
+  password    String
+  totpSecret  String?
+  notes       String?
+  sold        Boolean   @default(false)
+  orderId     String?
+  order       Order?    @relation(fields: [orderId], references: [id])
+  createdAt   DateTime  @default(now())
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  email           String
+  status          String      @default("pending")
+  totalCents      Int
+  paymentMethod   String?
+  stripeSessionId String?     @unique
+  plisioTxnId     String?     @unique
+  deliveryToken   String      @unique @default(cuid())
+  items           OrderItem[]
+  accounts        Account[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model OrderItem {
+  id             String  @id @default(cuid())
+  orderId        String
+  order          Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId      String
+  product        Product @relation(fields: [productId], references: [id])
+  quantity       Int
+  unitPriceCents Int
+}
