@@ -12,19 +12,23 @@ $headers = @{
 }
 
 $skipDirs = @("node_modules", ".next", ".git", "terminals")
-$files = Get-ChildItem -Path $root -Recurse -File | Where-Object {
-    $rel = $_.FullName.Substring($root.Length).TrimStart("\")
-    foreach ($d in $skipDirs) { if ($rel -like "$d\*" -or $rel -eq $d) { return $false } }
-    if ($_.Name -eq ".env") { return $false }
+$allFiles = [System.IO.Directory]::EnumerateFiles($root, "*", [System.IO.SearchOption]::AllDirectories)
+$files = $allFiles | Where-Object {
+    $rel = ($_.Substring($root.Length).TrimStart('\')) -replace '\\', '/'
+    $bad = $false
+    foreach ($d in $skipDirs) { if ($rel.StartsWith("$d/")) { $bad = $true } }
+    if ($bad) { return $false }
+    if ($rel -eq ".env" -or $rel.EndsWith("/.env")) { return $false }
     $true
-} | ForEach-Object { ($_.FullName.Substring($root.Length).TrimStart('\')) -replace '\\', '/' }
+} | ForEach-Object { ($_.Substring($root.Length).TrimStart('\')) -replace '\\', '/' }
 
 foreach ($path in $files) {
-    $fullPath = Join-Path $root $path.Replace("/", "\")
-    if (-not (Test-Path $fullPath)) { continue }
+    $fullPath = Join-Path $root ($path -replace '/', '\')
+    if (-not (Test-Path -LiteralPath $fullPath)) { continue }
     $bytes = [System.IO.File]::ReadAllBytes($fullPath)
     $b64 = [Convert]::ToBase64String($bytes)
-    $uri = "https://api.github.com/repos/$owner/$repo/contents/$path"
+    $encPath = (($path -split '/') | ForEach-Object { [System.Uri]::EscapeDataString($_) }) -join '/'
+    $uri = "https://api.github.com/repos/$owner/$repo/contents/$encPath"
     $body = @{ message = "Update $path"; content = $b64 }
     try {
         $existing = Invoke-RestMethod -Uri $uri -Method Get -Headers $headers -ErrorAction SilentlyContinue
